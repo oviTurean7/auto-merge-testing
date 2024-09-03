@@ -32,5 +32,5 @@ jobs:
       run: |
         git fetch origin
         git checkout development
-        git merge staging
+        git merge staging --allow-unrelated-histories
         git push origin development
