@@ -31,7 +31,7 @@ jobs:
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
       run: |
-        git fetch
+        git fetch --unshallow
         git checkout development
-        git merge staging --allow-unrelated-histories
-        git push origin development
+        git merge --no-ff staging -m "Auto-merge staging into development"
+        git push
