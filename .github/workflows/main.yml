@@ -24,11 +24,11 @@ jobs:
       run: |
         git checkout staging
         git merge main
-        git push origin staging
+        git push origin/staging
 
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
       run: |
         git checkout development
         git merge staging
-        git push origin development
+        git push origin/development
