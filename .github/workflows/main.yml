@@ -5,6 +5,10 @@ on:
     branches:
       - main
       - staging
+  pull_request:
+    branches:
+      - main
+      - staging
 
 jobs:
   automerge:
@@ -13,6 +17,8 @@ jobs:
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Ensure all branches are fetched
 
     - name: Set up Git
       run: |
@@ -26,7 +32,7 @@ jobs:
         git checkout staging
         git pull
         git merge --no-ff main -m "Auto-merge master into staging"
-        git push
+        git push origin staging
 
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
@@ -35,4 +41,4 @@ jobs:
         git checkout development
         git pull
         git merge --no-ff staging -m "Auto-merge staging into development"
-        git push
+        git push origin development
