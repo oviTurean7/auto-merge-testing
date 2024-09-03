@@ -24,7 +24,7 @@ jobs:
       run: |
         git fetch
         git checkout staging
-        git merge main
+        git merge main --allow-unrelated-histories
         git push origin staging
 
     - name: Merge staging into development
