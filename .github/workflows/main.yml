@@ -28,7 +28,6 @@ jobs:
     - name: Merge main into staging
       if: github.ref == 'refs/heads/main'
       run: |
-        git fetch --unshallow
         git checkout staging
         git pull
         git merge --no-ff main -m "Auto-merge master into staging"
@@ -37,7 +36,6 @@ jobs:
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
       run: |
-        git fetch --unshallow
         git checkout development
         git pull
         git merge --no-ff staging -m "Auto-merge staging into development"
