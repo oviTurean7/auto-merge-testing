@@ -22,7 +22,7 @@ jobs:
     - name: Merge main into staging
       if: github.ref == 'refs/heads/main'
       run: |
-        git fetch origin
+        git fetch
         git checkout staging
         git merge main
         git push origin staging
@@ -30,7 +30,7 @@ jobs:
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
       run: |
-        git fetch origin
+        git fetch
         git checkout development
         git merge staging --allow-unrelated-histories
         git push origin development
