@@ -32,6 +32,11 @@ jobs:
         git pull
         git merge --no-ff main -m "Auto-merge master into staging"
         git push origin staging
+        git checkout development
+        git pull
+        git merge --no-ff staging -m "Auto-merge staging into development"
+        git push origin development
+
 
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
