@@ -22,6 +22,8 @@ jobs:
     - name: Merge main into staging
       if: github.ref == 'refs/heads/main'
       run: |
+        git remote update
+        git fetch 
         git checkout staging
         git merge main
         git push staging
