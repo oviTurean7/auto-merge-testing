@@ -1,0 +1,34 @@
+name: Auto Merge Branches
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    - name: Set up Git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Merge main into staging
+      if: github.ref == 'refs/heads/main'
+      run: |
+        git checkout staging
+        git merge main
+        git push origin staging
+
+    - name: Merge staging into development
+      if: github.ref == 'refs/heads/staging'
+      run: |
+        git checkout development
+        git merge staging
+        git push origin development
