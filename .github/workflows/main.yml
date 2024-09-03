@@ -28,10 +28,17 @@ jobs:
     - name: Merge main into staging
       if: github.ref == 'refs/heads/main'
       run: |
+#     Update staging branch with master logic
         git checkout staging
         git pull
         git merge --no-ff main -m "Auto-merge master into staging"
         git push origin staging
+             
+#     Update dev branch with staging logic
+        git checkout development
+        git pull
+        git merge --no-ff staging -m "Auto-merge staging into development"
+        git push origin development
 
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
