@@ -33,5 +33,6 @@ jobs:
       run: |
         git fetch --unshallow
         git checkout development
+        git pull
         git merge --no-ff staging -m "Auto-merge staging into development"
         git push
