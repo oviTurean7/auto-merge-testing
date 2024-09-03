@@ -36,6 +36,7 @@ jobs:
         git pull
         git merge --no-ff staging -m "Auto-merge staging into development"
         git push origin development
+      continue-on-error: true  # Continue even if this step fails
 
 
     - name: Merge staging into development
@@ -45,3 +46,14 @@ jobs:
         git pull
         git merge --no-ff staging -m "Auto-merge staging into development"
         git push origin development
+      continue-on-error: true  # Continue even if this step fails
+
+    - name: Send Slack notification if merge fails
+      if: failure()
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data \
+        '{"text":"Merge failed in GitHub Actions workflow. Please check the logs for details."}' \
+        $SLACK_WEBHOOK_URL
+
