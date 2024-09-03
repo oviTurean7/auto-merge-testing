@@ -22,10 +22,11 @@ jobs:
     - name: Merge main into staging
       if: github.ref == 'refs/heads/main'
       run: |
-        git fetch
+        git fetch --unshallow
         git checkout staging
-        git merge main --allow-unrelated-histories
-        git push origin staging
+        git pull
+        git merge --no-ff main -m "Auto-merge master into staging"
+        git push
 
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
