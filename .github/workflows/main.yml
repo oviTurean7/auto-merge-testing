@@ -38,7 +38,6 @@ jobs:
         git push origin development
       continue-on-error: true  # Continue even if this step fails
 
-
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
       run: |
@@ -49,6 +48,7 @@ jobs:
       continue-on-error: true  # Continue even if this step fails
 
     - name: Send Slack notification if merge fails
+      if: failure()
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       run: |
