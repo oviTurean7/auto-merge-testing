@@ -22,13 +22,13 @@ jobs:
     - name: Merge main into staging
       if: github.ref == 'refs/heads/main'
       run: |
-        git checkout remotes/origin/staging
-        git merge remotes/origin/main
-        git push remotes/origin/staging
+        git checkout staging
+        git merge main
+        git push staging
 
     - name: Merge staging into development
       if: github.ref == 'refs/heads/staging'
       run: |
         git checkout development
         git merge staging
-        git push origin/development
+        git push development
