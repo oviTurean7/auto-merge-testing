@@ -55,7 +55,7 @@ jobs:
       run: |
         REPO_URL="https://github.com/$REPOSITORY"
         WORKFLOW_URL="$REPO_URL/actions/runs/$RUN_ID"
-        MESSAGE="Merge failed in [${REPOSITORY}]($REPO_URL). Check the [workflow run]($WORKFLOW_URL) for details."
+        MESSAGE="Merge failed in [${REPOSITORY}] ($REPO_URL). Check the [workflow run] ($WORKFLOW_URL) for details!"
         curl -X POST -H 'Content-type: application/json' --data \
         "{\"text\":\"$MESSAGE\"}" \
         $SLACK_WEBHOOK_URL
