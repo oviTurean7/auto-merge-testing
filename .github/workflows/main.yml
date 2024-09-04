@@ -48,7 +48,7 @@ jobs:
       continue-on-error: true  # Continue even if this step fails
 
     - name: Send Slack notification if merge fails
-      if: failure()
+      if: failure() || steps.merge_staging.outcome == 'failure' || steps.merge_development.outcome == 'failure'
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         REPOSITORY: ${{ github.repository }}
